@@ -1,0 +1,147 @@
+<div style="max-width:600px" width="100%">
+<style>
+.table th, .table td { border-top: none !important; }
+.table > tbody > tr > td { vertical-align: middle; }
+</style>
+<!-- Begin:&Warnings --><div class="alert alert-danger" role="alert">{WARNING}</div>
+<!-- End:&Warnings -->
+<!-- Begin:_Msg --><div class="alert alert-{_request_.LEVEL}" role="alert">{_request_.TEXT}</div>
+<!-- End:_Msg -->
+<TABLE >
+<!-- Begin:&Object -->
+<FORM method="post" action="index.php?db={_global_.z}&a=edit_obj" ENCTYPE="multipart/form-data" ONSUBMIT="savebtn.disabled = true; return true;">
+	<TR>
+		<TD>{ID}&nbsp;&nbsp;&nbsp;&nbsp;<B>{TYP_NAME}:</B>
+			<input type="hidden" name="do" value="save_val">
+			<input type="hidden" name="typ" value="{TYP}">
+			<input type="hidden" name="id" value="{ID}">
+			<!-- Begin:_Tab --><input type="hidden" name="tab" value="{_request_.tab}">
+			<!-- End:_Tab -->
+			<!-- Begin:_Next --><input type="hidden" name="next_act" value="{_request_.next_act}">
+			<!-- End:_Next -->
+		</TD>
+	</TR>
+	<TR>
+		<TD><!-- Begin:&Edit_Req --><input type="text" name="t{TYP}" value="{_parent_.VAL}" autofocus {_parent_.DISABLED} class="form-control">
+			<!-- End:&Edit_Req -->
+			<!-- Begin:&EditReq_REPORT_COLUMN -->
+				<select name="t{TYP}" {_parent_.DISABLED} class="form-control input-sm">
+					<!-- Begin:&Rep_Col_List --><option value="{ID}" {SELECTED}>{VAL}</option>
+					<!-- End:&Rep_Col_List -->
+				</select>
+			<!-- End:&EditReq_REPORT_COLUMN -->
+			<!-- Begin:&EditReq_GRANT -->
+				<select name="t{TYP}" {_parent_.DISABLED} class="form-control input-sm">
+					<!-- Begin:&Grant_List --><option value="{ID}" {SELECTED}>{VAL}</option>
+					<!-- End:&Grant_List -->
+				</select>
+			<!-- End:&EditReq_GRANT -->
+			<div style="height:5px; "></div>
+		</TD>
+	</TR>
+	<TR><TD>
+	<ul class="nav nav-tabs" >
+		<!-- Begin:&Tabs --><li {CLASS}><a href="index.php?db={_global_.z}&a=edit_obj&id={_parent_.id}&tab={TAB}">{VAL}</a></li>
+		<!-- End:&Tabs -->
+	</ul>
+	</TD></TR>
+	<TR>
+		<TD>
+		<div style="height:3px; "></div>
+		<TABLE class="table table-condensed">
+		<!-- Begin:&Object_Reqs -->
+		<TR>
+			<TD style=" max-width:400px; " ALIGN="right">
+				<!-- Begin:&Nullable_Req --><A TITLE="Обязательный реквизит!" NAME="{NOT_NULL}"><FONT COLOR="RED"><b>
+				<!-- End:&Nullable_Req -->
+				{TYP_NAME}:&nbsp;
+				<!-- Begin:&Nullable_Req_close --><!--{NOT_NULL}--></b></FONT></A>
+				<!-- End:&Nullable_Req_close -->
+			</TD>
+			<TD>
+			<!-- Begin:&EditReq_REFERENCE -->
+				<TABLE>
+				<TR>
+				<TD>
+				<nobr><select name="t{TYP}" {DISABLED} class="form-control input-sm">
+					<option> </option>
+					<!-- Begin:&Add_Obj_Ref_Reqs --><option value="{ID}"{SELECTED}>{VAL}</option>
+					<!-- End:&Add_Obj_Ref_Reqs -->
+					</select>
+					<!-- Begin:&Seek_Refs --><TD><input class="form-control input-sm" type="text" name="SEARCH_{_parent_.TYP}" size="15" value="{SEARCH}"><input type="hidden" name="PREV_SEARCH_{_parent_.TYP}" size="15" value="{SEARCH}"></TD><!-- End:&Seek_Refs -->
+					<!-- Begin:&Ref_Create_Granted -->
+					<TD><a id="p{TYP}" onclick="getElementById('NEW_{TYP}').style.display='block'; this.style.display='none'; getElementById('m{TYP}').style.display='block'; getElementById('NEW_{TYP}').focus();">
+						<button type="button" class="btn btn-default btn-sm">+</button></a>
+						<a id="m{TYP}" onclick="this.style.display='none'; getElementById('p{TYP}').style.display='inline-block'; getElementById('NEW_{TYP}').style.display='none'; getElementById('NEW_{TYP}').value=''" style="display:none; ">
+						<button type="button" class="btn btn-default btn-sm">&mdash;</button></a>
+					</TD>
+					<TD><input class="form-control input-sm" type="text" id="NEW_{TYP}" name="NEW_{TYP}" size="21" placeholder="Добавить '{_parent_.TYP_NAME}'" style="display:none; ">
+					</TD>
+					<!-- End:&Ref_Create_Granted -->
+				</nobr>
+				</TD>
+				</TR>
+				</TABLE>
+			<!-- End:&EditReq_REFERENCE -->
+			<!-- Begin:&EditReq_ARRAY --><A href="index.php?db={_global_.z}&id={TYP}&F_U={_parent_.ID}&a=object"><B>({_parent_.ARR_NUM})</B></A>
+				<!-- Begin:&ARRAY_val --> <input class="form-control input-sm" type="text" name="t{_parent_.TYP}" size="50" value="{VAL}"><!-- End:&ARRAY_val -->
+			<!-- End:&EditReq_ARRAY -->
+			<!-- Begin:&EditReq_SHORT --><input class="form-control input-sm" type="text" name="t{TYP}" size="50" value="{VAL}" {DISABLED}>
+			<!-- End:&EditReq_SHORT -->
+			<!-- Begin:&EditReq_MEMO --><TEXTAREA class="form-control input-sm" name="t{TYP}" COLS=50 ROWS=2 {DISABLED}>{VAL}</TEXTAREA>
+			<!-- End:&EditReq_MEMO -->
+			<!-- Begin:&EditReq_HTML --><TEXTAREA class="form-control input-sm" name="t{TYP}" COLS=50 ROWS=3 {DISABLED}>{VAL}</TEXTAREA>
+			<!-- End:&EditReq_HTML -->
+			<!-- Begin:&EditReq_CHARS --><input class="form-control input-sm" type="text" name="t{TYP}" size="50" value="{VAL}" {DISABLED}>
+			<!-- End:&EditReq_CHARS -->
+			<!-- Begin:&EditReq_FILE -->{VAL} <input class="form-control input-sm" type="file" name="t{TYP}" value="">
+			<!-- End:&EditReq_FILE -->
+			<!-- Begin:&EditReq_DATE --><input class="form-control input-sm" type="text" name="t{TYP}" size="10" value="{VAL}" {DISABLED}>
+			<!-- End:&EditReq_DATE -->
+			<!-- Begin:&EditReq_DATETIME --><input class="form-control input-sm" type="text" name="t{TYP}" size="18" value="{VAL}" {DISABLED}>
+			<!-- End:&EditReq_DATETIME -->
+			<!-- Begin:&EditReq_SIGNED --><input class="form-control input-sm" type="text" name="t{TYP}" size="10" value="{VAL}" {DISABLED}>
+			<!-- End:&EditReq_SIGNED -->
+			<!-- Begin:&EditReq_BOOLEAN --><input type="checkbox" name="t{TYP}" value="1" {CHECKED} {DISABLED}/><input type="hidden" name="b{TYP}" value="1">
+			<!-- End:&EditReq_BOOLEAN -->
+			<!-- Begin:&EditReq_NUMBER --><input class="form-control input-sm" type="text" name="t{TYP}" size="10" value="{VAL}" {DISABLED}>
+			<!-- End:&EditReq_NUMBER -->
+			<!-- Begin:&EditReq_CALCULATABLE -->{VAL}
+			<!-- End:&EditReq_CALCULATABLE -->
+			<!-- Begin:&EditReq_PWD -->{VAL}
+			<!-- End:&EditReq_PWD -->
+			</TD>
+		</TR>
+		<!-- End:&Object_Reqs -->
+		</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD colspan="2">
+		<!-- Begin:&Buttons --><div style="padding-bottom:10px; padding-right:5px; display:inline-block; "><A HREF="index.php?db={_global_.z}&{ATTRS}"><button type="button" class="btn btn-default btn-xs">{VAL}</button></A></div>
+		<!-- End:&Buttons -->
+		<TABLE >
+		<TR>
+		<TD>
+			<div id="controls" style="display:inline; ">
+			<input {DISABLED} type="submit" name="savebtn" class="btn btn-primary btn-sm" value="Сохранить">
+			<input {DISABLED} type="submit" name="copybtn" class="btn btn-default btn-sm" value="Копия">
+			</div>
+			<div id="delete" style="display:inline; ">
+			<A HREF="index.php?db={_global_.z}&a=object&id={TYP}&F_U={UP}&F_I={ID}"><button type="button" class="btn btn-default btn-sm">Отмена</button></A>
+			<button {DISABLED} type="button" class="btn btn-warning btn-sm" onclick="document.getElementById('controls').style.display='none'; document.getElementById('delete').style.display='none'; document.getElementById('confirm_del').style.display='block';">Удалить</button>
+			</div>
+			<div id="confirm_del" style="display:none; border:2px #f0ad4e solid; -moz-border-radius: 10px; -webkit-border-radius:10px; -khtml-border-radius:10px; border-radius:10px; padding:6px; ">
+			<p><b>Подтвердите удаление записи {VAL}</b></p>
+			<A HREF="index.php?db={_global_.z}&do=del&up={TYP}&id={ID}&a=object"><button type="button" class="btn btn-warning btn-sm">Да, удалить</button></A>
+			<button type="button" class="btn btn-default btn-sm" onclick="document.getElementById('controls').style.display='inline'; document.getElementById('delete').style.display='inline'; document.getElementById('confirm_del').style.display='none';">&nbsp;Отмена&nbsp;</button>
+			</div>
+		</TD>
+		</TR>
+		</TABLE>
+		</TD>
+	</TR>
+</FORM>
+<!-- End:&Object -->
+</TABLE>
+</div>

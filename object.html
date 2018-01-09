@@ -1,0 +1,194 @@
+<!-- Begin:&Uni_obj -->
+<!-- Begin:&Uni_obj_Parent --><P><A HREF="index.php?db={_global_.z}&id={TID}&a=object&F_U={UP}">{TYP}</A>: <A HREF="index.php?db={_global_.z}&id={_parent_.F_U}&a=edit_obj">{NAME} ({_parent_.F_U})</A></P>
+<!-- End:&Uni_obj_Parent -->
+<div style="display:{CREATE_GRANTED};">
+<FORM method="post" action="index.php?db={_global_.z}&id={ID}&a=edit_obj" ONSUBMIT="addbtn.disabled = true; return true;">
+<TABLE >
+	<TR>
+		<TD>&nbsp;{VAL}:&nbsp;</TD>
+		<TD>
+			<input type="hidden" name="do" value="new_object">
+			<input type="hidden" name="up" value="{UP}">
+			<!-- Begin:&New_Req -->{NEW_REQ}
+				<input autofocus type="text" name="val" class="form-control">
+			<!-- End:&New_Req -->
+			<!-- Begin:&New_Req_REPORT_COLUMN -->
+				<select name="val" style=" max-width:400px; " class="form-control">{NEW_REQ}
+					<!-- Begin:&Rep_Col_List -->
+						<option value="{ID}">{VAL}</option>
+					<!-- End:&Rep_Col_List -->
+				</select>
+			<!-- End:&New_Req_REPORT_COLUMN -->
+			<!-- Begin:&New_Req_GRANT -->
+				<select name="val" style=" max-width:400px; " class="form-control">{NEW_REQ}
+					<!-- Begin:&Grant_List -->
+						<option value="{ID}">{VAL}</option>
+					<!-- End:&Grant_List -->
+				</select>
+			<!-- End:&New_Req_GRANT -->
+		</TD>
+		<TD>
+			<input type="submit" name="addbtn" class="btn btn-sm btn-default" value="Добавить">
+		</TD>
+	</TR>
+</TABLE>
+</FORM>
+</div>
+<!-- Begin:&Warnings --><br/><div class="alert alert-danger" role="alert">{WARNING}</div>
+<!-- End:&Warnings -->
+<span id="filter_sign" title="Для отображения фильтра кликните на шапке таблицы" class="glyphicon glyphicon-filter" onclick="document.getElementById('filter_help').style.display='inline';"></span>
+<div id="filter_help" style="display:none;">Подсказка: для отображения фильтра кликните на шапке таблицы</div>
+<BR />
+<FORM method="post" ENCTYPE="multipart/form-data" action="index.php?db={_global_.z}&id={ID}&a=object&F_U={F_U}">
+<TABLE class="table table-striped table-condensed table-bordered">
+	<TR>
+		<!-- Begin:&Head_Ord_N -->
+		<TD BGCOLOR="#E8F4FC" ALIGN="center">{FILLER}<B>N</B></TD>
+		<!-- End:&Head_Ord_N -->
+		<TD BGCOLOR="#E8F4FC" ALIGN="center" OnClick="viewfilter();"><A HREF="index.php?db={_global_.z}&id={ID}&a=object{FILTER}&order_val=val" OnClick="event.stopPropagation();"><B>{VAL}</A></B></TD>
+		<!-- Begin:&Uni_Obj_Head -->
+		<TD BGCOLOR="#E8F4FC" ALIGN="center" OnClick="viewfilter();"><A HREF="index.php?db={_global_.z}&id={ID}&a=object{FILTER}&order_val={TYP}" OnClick="event.stopPropagation();">{VAL}</A></TD>
+		<!-- End:&Uni_Obj_Head -->
+		<!-- Begin:&Uni_Obj_Head_Links -->
+		<TD BGCOLOR="#E8F4FC" ALIGN="center" OnClick="viewfilter();"><A {VAL}><FONT COLOR="GRAY">Связи</FONT></A></TD>
+		<!-- End:&Uni_Obj_Head_Links -->
+		<!-- Begin:&Head_Move_N_Delete -->
+		<TD BGCOLOR="#E8F4FC" OnClick="viewfilter();">{FILLER}&nbsp;</TD>
+		<!-- End:&Head_Move_N_Delete -->
+	</TR>
+	<TR id="filter_row" style="display:none;">
+		<!-- Begin:&Head_Ord -->
+		<TD BGCOLOR="#E8F4FC" style="padding:0px;">{FILLER}&nbsp;</TD>
+		<!-- End:&Head_Ord -->
+		<TD BGCOLOR="#E8F4FC" style="padding:0px;" align="center"><!--{TYP}-->
+			<!-- Begin:&Filter_Val_RCM -->
+				<input type="text" name="{F_TYP}" value="{FILTER}" size="2" id="{F_TYP}" oninput="adjust('{F_TYP}')" style="width:100%; ">
+			<!-- End:&Filter_Val_RCM -->
+			<!-- Begin:&Filter_Val_DNS -->
+				<nobr><input type="text" name="{F_TYP_FR}" value="{FILTER_FR}" size="2" id="{F_TYP_FR}" oninput="adjust('{F_TYP_FR}')">-</nobr><input type="text" name="{F_TYP_TO}" value="{FILTER_TO}" size="2" id="{F_TYP_TO}" oninput="adjust('{F_TYP_TO}')">
+			<!-- End:&Filter_Val_DNS -->
+		</TD>
+		<!-- Begin:&Uni_Obj_Head_Filter --><!--{TYP}-->
+		<TD BGCOLOR="#E8F4FC" style="padding:0px;" align="center">
+			<!-- Begin:&Filter_Req_RCM -->
+				<input type="text" name="{F_TYP}" value="{FILTER}" size="2" id="{F_TYP}" oninput="adjust('{F_TYP}')" style="width:100%; ">
+			<!-- End:&Filter_Req_RCM -->
+			<!-- Begin:&Filter_Req_DNS -->
+				<nobr><input type="text" name="{F_TYP_FR}" value="{FILTER_FR}" size="1" id="{F_TYP_FR}" oninput="adjust('{F_TYP_FR}')">-</nobr><input type="text" name="{F_TYP_TO}" value="{FILTER_TO}" size="1" id="{F_TYP_TO}" oninput="adjust('{F_TYP_TO}')">
+			<!-- End:&Filter_Req_DNS -->
+		</TD>
+		<!-- End:&Uni_Obj_Head_Filter -->
+		<!-- Begin:&Uni_Obj_Head_Filter_Links --><!--{VAL}-->
+		<TD BGCOLOR="#E8F4FC" style="padding:0px;">
+			&nbsp;
+		</TD>
+		<!-- End:&Uni_Obj_Head_Filter_Links -->
+		<!-- Begin:&Head_Move_N_Delete -->
+		<TD BGCOLOR="#E8F4FC" style="padding:0px;">{FILLER}&nbsp;</TD>
+		<!-- End:&Head_Move_N_Delete -->
+	</TR>
+	<!-- Begin:&Uni_Obj_All -->
+	<TR>
+		<!-- Begin:&Ord -->
+		<TD ALIGN="RIGHT">
+			{ORD}
+		</TD>
+		<!-- End:&Ord -->
+		<TD ALIGN="{ALIGN}"><A style=" display: block; " HREF="index.php?db={_global_.z}&id={ID}&a=edit_obj" TITLE="Редактировать">{VAL}</A></TD>
+		<!-- Begin:&Uni_Object_View_Reqs -->
+		<TD ALIGN="{ALIGN}">{VAL}&nbsp;</TD>
+		<!-- End:&Uni_Object_View_Reqs -->
+		<!-- Begin:&Uni_Object_View_Reqs_Links -->
+		<TD ALIGN="center">{VAL}
+			<!-- Begin:&Reqs_Links --><A HREF="index.php?db={_global_.z}&id={VALUE}&lnx=1&F_{LINKS_TYP}=@{_parent_.ID}&a=object"><FONT SIZE="-2" COLOR="GRAY">{KEY}</FONT></A>&nbsp;<!-- End:&Reqs_Links -->&nbsp;
+		</TD>
+		<!-- End:&Uni_Object_View_Reqs_Links -->
+		<!-- Begin:&Move_N_Delete -->
+		<TD ALIGN="CENTER">
+			<!-- Begin:&Move -->
+			<A HREF="index.php?db={_global_.z}&do=move_up_arr_line&id={ID}">^</A>
+			<!-- End:&Move -->
+			<A HREF="index.php?db={_global_.z}&do=del&up={_parent_.TYP}&f_u={_parent_.F_U}&id={ID}&a=object" TITLE="Удалить" COLOR="#003399">X</A>
+		</TD>
+		<!-- End:&Move_N_Delete -->
+	</TR>
+	<!-- End:&Uni_Obj_All -->
+</TABLE>
+<!-- Begin:&No_Page -->
+<p><span >Показаны не все записи. Показать: <a href="index.php?db={_global_.z}&id={ID}&a=object{lnx}&F_U={F_U}&f_show_all=1&pg=2">следующие {LIMIT}</a>, <a href="index.php?db={_global_.z}&id={ID}&a=object{lnx}&F_U={F_U}&f_show_all=1">все</a>.</span></p>
+<br>
+<!-- End:&No_Page -->
+<!-- Begin:&Uni_Obj_Pages -->
+<ul class="pagination">
+	<li> <span >Всего {VAL}&nbsp;запис{ENDING}{DELIM}</span></li>
+	<!-- Begin:&Page -->
+		<li class="{CLASS}"><a <!-- Begin:&Page_Href -->href="index.php?db={_global_.z}&id={ID}&a=object{FILTER}&pg={_parent_.PAGE}"<!-- End:&Page_Href -->>
+			 <span >{VAL}</span></a></li>
+	<!-- End:&Page -->
+</ul>
+<br>
+<!-- End:&Uni_Obj_Pages -->
+<input type="hidden" name="F_I" value="{F_I}">
+<div id="controls" style="display:inline; ">
+<input type="submit" name="prompt" class="btn btn-sm btn-primary" value="Применить фильтр">
+<input type="submit" name="full" class="btn btn-sm btn-default" value="Подробно">
+<input type="hidden" name="lnx" value="{LNX}">
+<input type="submit" name="switch_links" class="btn btn-sm btn-default" value="Связи">
+<!-- Begin:&DELETE -->{OK}
+<button type="button" class="btn btn-sm btn-warning" onclick="document.getElementById('controls').style.display='none'; document.getElementById('confirm_del').style.display='block';">Удалить объекты</button>
+<!-- End:&DELETE -->
+</div>
+<div id="confirm_del" style="max-width:400px; display:none; border:2px #f0ad4e solid; -moz-border-radius: 10px; -webkit-border-radius:10px; -khtml-border-radius:10px; border-radius:10px; padding:6px; ">
+<p><b>Подтвердите удаление записей</b></p>
+<input type="submit" class="btn btn-sm btn-warning" name="del_selection" value="Да, удалить">
+<button type="button" class="btn btn-sm btn-default" onclick="document.getElementById('controls').style.display='inline'; document.getElementById('confirm_del').style.display='none';">&nbsp;Отмена&nbsp;</button>
+</div>
+<!-- Begin:&EXPORT -->{OK}
+<p>
+<table>
+<tr>
+	<td><input type="submit" class="btn btn-sm btn-default" name="csv" value="Экспорт CSV"></td><td>&nbsp;</td>
+	<td><input type="submit" name="bki" class="btn btn-sm btn-default" value="Экспорт BKI"></td><td>&nbsp;</td>
+	<td>
+		<div id="confirm_del" style="border:1px lightgray solid; -moz-border-radius: 5px; -webkit-border-radius:5px; -khtml-border-radius:5px; border-radius:5px; padding:6px; ">
+			<table>
+				<tr>
+					<td><input type="submit" name="import" class="btn btn-sm btn-default" value="Импорт BKI:"></td>
+					<td align="right"><input class="btn btn-sm" type="file" name="bki_file" value=""></td>
+				</tr>
+			</table>
+		</div>
+	</td>
+</tr>
+</table>
+</p>
+<!-- End:&EXPORT -->
+ <a href="index.php?db={_global_.z}&id={ID}&a=object&F_U={F_U}">Очистить фильтр и сортировку</a>
+
+</FORM>
+<script>
+	function viewfilter() {
+		var el=document.getElementById('filter_row');
+		if(el.style.display=='table-row')
+			el.style.display='none';
+		else {
+			el.style.display='table-row'
+			document.getElementById('filter_sign').style.display='none';
+			document.getElementById('filter_help').style.display='none';
+		};
+	};
+	function adjust(id) {
+		var el=document.getElementById(id);
+		el.size=el.value.length + 1;
+	};
+	var filter=document.getElementById("filter_row");
+	var filters=filter.getElementsByTagName("input");
+	for(i = 0;i < filters.length; i++)
+		if(filters[i].value!="") {
+			filters[i].size=filters[i].value.length + 1;
+			document.getElementById('filter_row').style.display='table-row';
+			document.getElementById('filter_sign').style.display='none';
+			document.getElementById('filter_help').style.display='none';
+		}
+</script>
+<!-- End:&Uni_obj -->
