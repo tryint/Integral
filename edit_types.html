@@ -4,7 +4,7 @@ var editable=ext=false
 	,nullmask=/:!NULL:/i
 	,aliasmask=/:ALIAS=(.+):/u;
 <!-- Begin:_ID -->
-curid={_request_.id};
+curid='{_global_.id}';
 <!-- End:_ID -->
 <!-- Begin:_Ext -->{_request_.ext}
 ext=true;
@@ -15,7 +15,7 @@ var s='<select name="t" class="form-control">';
 <!-- End:&Types -->
 </script>
 <!-- Begin:&Editables -->{OK}
-<FORM style="margin:5px;" method="post" action="index.php?db={_global_.Z}&a=edit_types&do=te_new_typ" onsubmit="if(document.getElementById('val').value=='') {alert('Введите название типа!'); event.returnValue=false; event.preventDefault();} addbtn.disabled=true;">
+<FORM style="margin:5px;" method="post" action="/{_global_.Z}/te_new_typ/" onsubmit="if(document.getElementById('val').value=='') {alert('Введите название типа!'); event.returnValue=false; event.preventDefault();} addbtn.disabled=true;">
 <TABLE>
 	<TR>
 		<TD><input type="text" id="val" name="val" placeholder="Поиск / Новый Тип" MAXLENGTH="127" class="form-control"></TD>
@@ -45,7 +45,7 @@ document.getElementById('sel_types').innerHTML=s;
 <div  style="padding-left:33px;">
 <table class="table">
 <tr>
-<td style="border-top:none;"><a href="index.php?db={_global_.Z}&a=edit_types" title="Обновить страницу и свернуть все объекты"><span class="glyphicon glyphicon-refresh"></span></td>
+<td style="border-top:none;"><a href="/{_global_.Z}/edit_types" title="Обновить страницу и свернуть все объекты"><span class="glyphicon glyphicon-refresh"></span></a></td>
 </tr>
 </table>
 </div>
@@ -58,8 +58,7 @@ var s=new Array();
 <!-- Begin:&Edit_Typs -->if(t[{ID}]===undefined) t[{ID}]={t:{T},r:"{REF_VAL}",u:{UNIQ},v:"{VAL}"};
 if(0{ORD}){if(r[{ID}]===undefined) r[{ID}]={};r[{ID}]["{ORD}"]={ i:"{REQ_ID}",t:"{REQ_T}",a:"{ATTRS}",r:"{REFT}"};}
 <!-- End:&Edit_Typs -->
-console.log(t);
-console.log(r);
+
 function toggleMenu(i){
 	var menu=diclink=dicenter=createlink="";
 	if(document.getElementById('m'+i).style.display=='none'){
@@ -69,20 +68,19 @@ function toggleMenu(i){
 		for(var j in t)
 			if(t[j].r==i){
 				diclink='&nbsp;<a href="#'+j+'" title="Ссылка на справочник"><span class="glyphicon glyphicon-screenshot"></span></a>&nbsp;';
-				dicenter='&nbsp;<a href="index.php?db={_global_.Z}&a=object&id='+i+'" title="Войти в справочник"><span class="glyphicon glyphicon-book"></span></a>&nbsp;';
+				dicenter='&nbsp;<a href="/{_global_.Z}/object/'+i+'" title="Войти в справочник"><span class="glyphicon glyphicon-book"></span></a>&nbsp;';
 				break;
 			}
 		if(editable){
 			if(t[i].r!="")
 				menu+='<a onclick="toggleMenu('+i+');" title="Кликните еще раз, чтобы свернуть">'+t[t[i].t].v +'</a><br/>';
 			else if(t[i].t==0){
-				menu+='<FORM method="post" action="index.php?db={_global_.z}&next_act=edit_types%26ext&do=te_save_typ&id='+i+'">'
+				menu+='<FORM method="post" action="/{_global_.z}/te_save_typ/'+i+'/">'
 					+'<p><input type="text" name="val" value="'+t[i].v+'" MAXLENGTH="127" class="form-control sm"></p>'
 					+'<input type="submit" name="savebtn" class="btn btn-primary btn-sm" value="Сохранить" />&nbsp;&nbsp;&nbsp;<A onclick="toggleMenu('+i+');">Отмена</a></FORM>';
 			}
 			else{
-				menu+='<FORM method="post" action="index.php?db={_global_.z}&next_act=edit_types%26ext&do=te_save_typ">';
-				menu+='<input type="hidden" name="id" value="'+i+'">';
+				menu+='<FORM method="post" action="/{_global_.z}/te_save_typ/'+i+'/">';
 				menu+='<input type="text" name="val" value="'+t[i].v+'" MAXLENGTH="127" class="form-control sm">';
 				menu+='<select name="t" class="form-control">';
 				for(var k in bt)
@@ -99,10 +97,10 @@ function toggleMenu(i){
 							break outer;
 						}
 					if(createlink=="")
-						menu+='<br /><a href="index.php?db={_global_.z}&a=edit_types&do=te_new_ref&t='+i+'" title="Создать ссылку на этот тип (использовать его как справочник)"><span class="glyphicon glyphicon-book"></span>&nbsp;Создать ссылку</a><br />';
+						menu+='<br /><a href="/{_global_.z}/te_new_ref/'+i+'/" title="Создать ссылку на этот тип (использовать его как справочник)"><span class="glyphicon glyphicon-book"></span>&nbsp;Создать ссылку</a><br />';
 				}
 			}
-			menu+='<br /><table width="100%"><tr><td align="left"><a href="index.php?db={_global_.Z}&do=te_del_typ&id='+i+'&a=edit_types"><font color="red"><span class="glyphicon glyphicon-remove"></span></font>&nbsp;Удалить тип</a></td>';
+			menu+='<br /><table width="100%"><tr><td align="left"><a href="/{_global_.Z}/te_del_typ/'+i+'/"><font color="red"><span class="glyphicon glyphicon-remove"></span></font>&nbsp;Удалить тип</a></td>';
 			menu+='<td align="right">'+dicenter+diclink+'</td></tr></table>';
 		}
 		else{
@@ -155,7 +153,7 @@ function wrapObj(i){
 	var obj='<div class="panel panel-default" id="'+i+'">';
 	obj+='<div class="panel-heading">';
 	if(t[i].r!="")
-		obj+='<a href="index.php?db={_global_.Z}&a=object&id='+t[i].r+'" title="Войти в справочник"><span class="glyphicon glyphicon-log-in"></span></a>&nbsp;';
+		obj+='<a href="/{_global_.Z}/object/'+t[i].r+'" title="Войти в справочник"><span class="glyphicon glyphicon-log-in"></span></a>&nbsp;';
 	obj+='<a id="id'+i+'" style="display:inline;" onclick="toggleMenu('+i+');">'+(t[i].r!="" ? t[t[i].t].v : t[i].v)+'</a>';
 	obj+='<div id="m'+i+'" style="display:none;"></div>';
 	if(r[i]===undefined)
@@ -170,7 +168,7 @@ document.getElementById('def'+i).style.display='none';
 }
 function editDef(i){
 document.getElementById('a'+i).style.display='none';
-document.getElementById('def'+i).innerHTML='<FORM method="post" action="index.php?db={_global_.z}&next_act=edit_types%26ext&do=te_save_alias&id='+i+'">'
+document.getElementById('def'+i).innerHTML='<FORM method="post" action="/{_global_.z}/te_save_alias/'+i+'/">'
 	+'<table><tr><td colspan="2" style="padding:7px;"><input type="text" name="val" value="'+t[i].alias+'" MAXLENGTH="127" title="Задайте псевдоним этого типа: ссылка на '+t[i].ref+'">'
 	+'</td></tr><tr><td style="padding:7px;"><input type="submit" value="Сохранить"></td>'
 	+'<td style="padding:7px;"><a onclick="closeDef('+i+');">Отмена</a></td></tr></table></form>';
@@ -215,17 +213,17 @@ function drawReqs(i, ext){
 		if(ext){
 			reqs+='<tr><td>'+name+'</td><td>';
 			if(editable){
-				reqs+='<A HREF="index.php?db={_global_.Z}&do=te_del_req&id='+r[i][req].i+'&next_act=edit_types%26ext&up='+i+'" TITLE="Удалить">X</A>&nbsp;';
-				reqs+='&nbsp;<A HREF="index.php?db={_global_.Z}&do=te_move_up&id='+r[i][req].i+'&next_act=edit_types%26ext&up='+i+'" TITLE="Поднять выше">^</A>&nbsp;';
+				reqs+='<A HREF="/{_global_.Z}/te_del_req/'+r[i][req].i+'/" TITLE="Удалить">X</A>&nbsp;';
+				reqs+='&nbsp;<A HREF="/{_global_.Z}/te_move_up/'+r[i][req].i+'/" TITLE="Поднять выше">^</A>&nbsp;';
 				if(t[r[i][req].t].t==0)
 					reqs+='</td><td colspan="2">&nbsp;</td>';
 				else{
 					if(nullable=='set_null')
-						reqs+='&nbsp;<A HREF="index.php?db={_global_.Z}&do=te_set_not_null&id='+r[i][req].i+'&a=edit_types%26ext&up='+i+'" TITLE="Нажмите, чтобы сделать поле необязательным">[!]</A>';
+						reqs+='&nbsp;<A HREF="/{_global_.Z}/te_set_not_null/'+r[i][req].i+'/?up='+i+'" TITLE="Нажмите, чтобы сделать поле необязательным">[!]</A>';
 					else
-						reqs+='&nbsp;<A HREF="index.php?db={_global_.Z}&do=te_set_null&id='+r[i][req].i+'&a=edit_types%26ext&up='+i+'" TITLE="Нажмите, чтобы сделать поле обязательным">[&nbsp;]</A>';
-					reqs+='&nbsp;</td><td><FORM method="post" id="frm'+r[i][req].i+'" action="index.php?db={_global_.Z}&next_act=edit_types%26ext&do=te_save_attrs&up='+i+'">';
-					reqs+='<input type="hidden" name="id" value="'+r[i][req].i+'"><input type="hidden" name="'+nullable+'" value="1">';
+						reqs+='&nbsp;<A HREF="/{_global_.Z}/te_set_null/'+r[i][req].i+'/?up='+i+'" TITLE="Нажмите, чтобы сделать поле обязательным">[&nbsp;]</A>';
+					reqs+='&nbsp;</td><td><FORM method="post" id="frm'+r[i][req].i+'" action="/{_global_.Z}/te_save_attrs/'+r[i][req].i+'/?up='+i+'">';
+					reqs+='<input type="hidden" name="'+nullable+'" value="1">';
 					if(alias!=t[id].v)
 						reqs+='<input type="hidden" name="alias" value="'+alias+'">';
 					reqs+='<input type="text" name="val" value="'+def_val+'"></FORM></td>';
@@ -253,9 +251,7 @@ function drawReqs(i, ext){
 	if(ext){
 		reqs+='</table>';
 		if(editable){ // Draw the Add req DDList and button
-			reqs+='<FORM method="post" action="index.php?db={_global_.Z}&next_act=edit_types%26ext" onsubmit="addreqbtn'+i+'.disabled=true;">';
-			reqs+='<input type="hidden" name="do" value="te_add_req"><input type="hidden" name="id" value="'+i+'">';
-			reqs+='<input type="hidden" name="up" value="'+i+'">';
+			reqs+='<FORM method="post" action="/{_global_.Z}/te_add_req/'+i+'" onsubmit="addreqbtn'+i+'.disabled=true;">';
 			reqs+='<div class="input-group input-group-sm"><select style="max-width:300px; " name="t" class="form-control"><option> </option>';
 			var my=new Array();
 			my[i]=i;
@@ -299,13 +295,19 @@ function getParent(id){
 function findCross(i, p){
 	for(j in r[i])
 		if((r[i][j].r!="") && (t[r[i][j].t].t==p))
-			return i!=p;
+			return (i!=p);
+		else
+		if(t[r[i][j].t].r!==i)
+		    return true;
 	return false;
 }
+// Start here
 var p=rest="";
+// Sort the types list
 for(i in t)
 	s[i]={v:t[i].v, i:i};
 s.sort(sVal);
+// Draw the types having other types as requisites
 for(i in r)
 	if((o[i]===undefined) && (t[i]["r"]=="")){
 		p=getParent(i);
@@ -315,13 +317,12 @@ for(i in r)
 		if(findCross(i, p))
 			drawObj(i,"",false);
 	}
-console.log(t);
-console.log(s);
-
+// Draw those having neither references, nor arrays 
 for(i in r)
 	if(t[i]["r"]!="")
 		drawObj(i,"",false);
-for(i in s) // Add the rest in a chunk at once for better performance
+// Add the rest in a chunk at once for better performance
+for(i in s)
 	if(o[s[i].i]===undefined)
 		rest+=drawObj(s[i].i,"",true);
 document.getElementById('obj').innerHTML+=rest;
